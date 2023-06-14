@@ -6,3 +6,4 @@
 ## Sanity
 
 * [Connecting content to NextJS](sanity/connecting-content-to-nextjs.md)
+* [Designing a Document Database](sanity/designing-a-document-database.md)
