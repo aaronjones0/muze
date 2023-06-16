@@ -11,4 +11,5 @@ export interface TVSeries {
    * FK Medium
    */
   medium: number;
+  primaryImage?: string;
 }
