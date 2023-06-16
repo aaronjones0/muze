@@ -13,3 +13,6 @@ From [Schema Design and Relationship in NoSQL Document-based databases](https://
 > 7. Avoid joins and populate (lookups) if possible, but don't be afraid if they can provide a better schema design
 > 8. Arrays should not grow without bound. If there are more than a couple of hundred documents on the many sides, don't embed them; if there are more than a few thousand documents on the many sides, don't use an array of ObjectID references.
 
+## Data Types
+
+[GROQ Data Types](https://www.sanity.io/docs/groq-data-types)

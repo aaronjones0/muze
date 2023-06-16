@@ -4,7 +4,8 @@
 
 ## The Muze Library
 
-* [Library Entries](the-muze-library/library-entries.md)
+* [Library Entries](the-muze-library/library-entries/README.md)
+  * [Manga](the-muze-library/library-entries/manga.md)
 
 ## Technical Documentation
 
