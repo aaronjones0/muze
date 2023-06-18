@@ -14,7 +14,7 @@ module.exports = {
       },
       boxShadow: {
         'ns-md': '4px 4px 12px #000000',
-        'nh-md': '-4px -4px 12px #555555',
+        'nh-md': '-4px -4px 12px #444444',
       }
     },
   },
