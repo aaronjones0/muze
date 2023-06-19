@@ -1,6 +1,7 @@
 'use client';
 
 import { Transition } from '@headlessui/react';
+import { roboto_mono } from '@muze/lib/fonts';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
@@ -19,17 +20,20 @@ export default function LinkButton({
   const router = useRouter();
   const [hotkeyActive, setHotkeyActive] = useState(false);
 
-  const handleKeyDown = useCallback((event: KeyboardEvent) => {
-    if (event.altKey && event.key === hotkey) {
-      event.stopPropagation();
-      event.preventDefault();
-      router.push(href);
-    } else if (event.altKey) {
-      event.stopPropagation();
-      event.preventDefault();
-      setHotkeyActive(true);
-    }
-  }, [hotkey, href, router]);
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.altKey && event.key === hotkey) {
+        event.stopPropagation();
+        event.preventDefault();
+        router.push(href);
+      } else if (event.altKey) {
+        event.stopPropagation();
+        event.preventDefault();
+        setHotkeyActive(true);
+      }
+    },
+    [hotkey, href, router]
+  );
 
   const handleKeyUp = useCallback((event: KeyboardEvent) => {
     if (!event.altKey) {
@@ -71,7 +75,14 @@ export default function LinkButton({
             leaveFrom='opacity-100 scale-100'
             leaveTo='opacity-0 scale-75'
           >
-            <p className='rounded-md h-6 w-6 border-2 overflow-hidden bg-neutral-900 border-amber-400 text-amber-400 align-middle text-center leading-none pt-0.5'>
+            <p
+              className={[
+                roboto_mono.className,
+                'rounded-md h-6 w-6 border-2 overflow-hidden',
+                'bg-neutral-900 border-amber-400 text-amber-400',
+                'align-middle text-center leading-none pt-0.5',
+              ].join(' ')}
+            >
               {hotkey}
             </p>
           </Transition>

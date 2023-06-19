@@ -2,19 +2,16 @@
 
 import SomeComp from '@muze/components/some-comp/somecomp';
 import { createClient } from 'next-sanity';
-import { useRouter } from 'next/navigation';
 
 export default async function Home() {
   // const tvSeries: TVSeries[] = await getTVSeries();
   // const books: Book[] = await getBooks();
   // const manga: Manga[] = await getManga();
 
-  const router = useRouter();
-
   return (
     <>
       <div className='h-full'>
-        <SomeComp onAddEntry={() => router.push('/add-entry')} />
+        <SomeComp />
         {/* <Image src='/MuzeLogo.svg' height={80} width={80} alt='Muze Logo' /> */}
         {/* <AppHeader command={command} onCommandChanged={(cmd) => setCommand(cmd)} /> */}
         {/* <div className='flex flex-row'>

@@ -17,8 +17,8 @@ module.exports = {
         'ns-md': '4px 4px 12px #000000',
         'nch-sm': '2px 2px 6px #333333',
         'nh-md': '-4px -4px 12px #333333',
-      }
+      },
     },
   },
   plugins: [],
-}
+};
