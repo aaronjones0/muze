@@ -15,7 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={[inter.className, 'bg-neutral-900 text-neutral-700 h-full w-full'].join(' ')}>{children}</body>
+      <body className={[inter.className, 'bg-neutral-900 selection:bg-amber-400 selection:text-amber-900'].join(' ')}>
+        <div className='bg-neutral-900 text-neutral-700 container mx-auto py-8 h-screen flex flex-col gap-4'>
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

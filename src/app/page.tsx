@@ -1,43 +1,45 @@
-'use client';
+'use client'
 
-import { Book } from '@muze/model/Book';
-import { Manga } from '@muze/model/Manga';
-import { TVSeries } from '@muze/model/TVSeries';
+import SomeComp from '@muze/components/some-comp/somecomp';
 import { createClient } from 'next-sanity';
-import Image from 'next/image';
-import Link from 'next/link';
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default async function Home() {
-  const tvSeries: TVSeries[] = await getTVSeries();
-  const books: Book[] = await getBooks();
-  const manga: Manga[] = await getManga();
+  // const tvSeries: TVSeries[] = await getTVSeries();
+  // const books: Book[] = await getBooks();
+  // const manga: Manga[] = await getManga();
 
-  // const router = useRouter();
+  const router = useRouter();
 
   return (
     <>
-      <div className='absolute top-0 bottom-0 left-0 right-0 p-4 bg-neutral-900 text-neutral-600 overflow-y-auto'>
-        <Image src='/MuzeLogo.svg' height={80} width={80} alt='Muze Logo' />
-        <div className='flex flex-row'>
+      <div className='h-full'>
+        <SomeComp onAddEntry={() => router.push('/add-entry')} />
+        {/* <Image src='/MuzeLogo.svg' height={80} width={80} alt='Muze Logo' /> */}
+        {/* <AppHeader command={command} onCommandChanged={(cmd) => setCommand(cmd)} /> */}
+        {/* <div className='flex flex-row'>
           {tvSeries?.map((tvs) => (
-            <div key={tvs._id}>
-              <div className='inline-block hover:text-neutral-400'>
-                <div className='m-3 rounded-xl w-fit shadow-nh-md cursor-pointer'>
-                  <div className='h-full w-full rounded-xl shadow-ns-md overflow-hidden border-2 border-neutral-900'>
-                    <img
-                      src={tvs.primaryImage ? `${tvs.primaryImage}?h=200` : ''}
-                      alt={`${tvs.short_title} Cover Image`}
-                    />
+            <Link href={`/tv-series/${tvs._id}`} key={tvs._id}>
+              <div>
+                <div className='inline-block hover:text-neutral-400'>
+                  <div className='m-3 rounded-xl w-fit shadow-nh-md cursor-pointer'>
+                    <div className='h-full w-full rounded-xl shadow-ns-md overflow-hidden border-2 border-neutral-900'>
+                      <img
+                        src={
+                          tvs.primaryImage ? `${tvs.primaryImage}?h=200` : ''
+                        }
+                        alt={`${tvs.short_title} Cover Image`}
+                      />
+                    </div>
+                  </div>
+                  <div className='flex'>
+                    <label className='grow w-0 mx-3 pl-1 text-sm'>
+                      {tvs.short_title}
+                    </label>
                   </div>
                 </div>
-                <div className='flex'>
-                  <label className='grow w-0 mx-3 pl-1 text-sm'>
-                    {tvs.short_title}
-                  </label>
-                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className='flex flex-row'>
@@ -95,7 +97,7 @@ export default async function Home() {
               </div>
             </Link>
           ))}
-        </div>
+        </div> */}
       </div>
     </>
   );

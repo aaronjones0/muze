@@ -1,3 +1,5 @@
+import ProcessingIndicator from "@muze/components/ProcessingIndicator/ProcessingIndicator";
+
 export default function Loading() {
-  return <p>Loading...</p>;
+  return <ProcessingIndicator />;
 }

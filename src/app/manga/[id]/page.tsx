@@ -1,6 +1,7 @@
 'use client';
 
 import ImageTile from '@muze/components/ImageTile/ImageTile';
+import LinkButton from '@muze/components/LinkButton/LinkButton';
 import { sanity } from '@muze/lib/sanity-client';
 import { Manga } from '@muze/model/Manga';
 
@@ -10,47 +11,35 @@ export default async function Page({ params }: { params: { id: string } }) {
   const manga: Manga = results[0];
 
   return (
-    <div className='bg-neutral-900 text-neutral-700'>
-      <ol>
-        <li>{manga._id}</li>
-        <li>{manga.title_english}</li>
-        <li>{manga.title_japanese}</li>
-        <li>
-          {/* <img src={manga.front_cover_english_url} alt='english front cover' /> */}
-          <ImageTile
-            src={`${manga.front_cover_english_url}?h=200`}
-            alt='english front cover'
-          />
-        </li>
-        <li>
-          {/* <img src={manga.back_cover_english_url} alt='english back cover' /> */}
-          <ImageTile
-            src={`${manga.back_cover_english_url}?h=200`}
-            alt='english back cover'
-          />
-        </li>
-        <li>
-          {/* <img
-            src={manga.front_cover_japanese_url}
-            alt='japanese front cover'
-          /> */}
-          <ImageTile
-            src={`${manga.front_cover_japanese_url}?h=200`}
-            alt='japanese front cover'
-          />
-        </li>
-        <li>
-          {/* <img src={manga.back_cover_japanese_url} alt='japanese back cover' /> */}
-          <ImageTile
-            src={`${manga.back_cover_japanese_url}?h=200`}
-            alt='japanese back cover'
-          />
-        </li>
-        <li>Owned: {manga.owned}</li>
-        <li>
-          Volume {manga.volume} of {manga.total_volumes}
-        </li>
-      </ol>
+    <div className='h-full flex flex-row text-neutral-500'>
+      <div className='grow flex flex-col'>
+        <h1 className='mt-4 text-4xl text-neutral-300 font-black tracking-wider'>
+          {manga.title_english}
+        </h1>
+        <h2 className='mb-8 text-2xl text-neutral-400 font-black tracking-wider'>
+          {manga.title_japanese}
+        </h2>
+        <ol>
+          <li>{manga._id}</li>
+          {/* <li>
+            <ImageTile
+              src={`${manga.front_cover_japanese_url}?h=200`}
+              alt='japanese front cover'
+            />
+          </li> */}
+          <li>Owned: {manga.owned ? 'Yes' : 'No'}</li>
+          <li>
+            Volume {manga.volume} of {manga.total_volumes}
+          </li>
+        </ol>
+        <LinkButton label='Home' href='/' />
+      </div>
+      <div className='basis-2/5'>
+        <ImageTile
+          src={`${manga.front_cover_english_url}`}
+          alt={`${manga.title_english} primary image`}
+        />
+      </div>
     </div>
   );
 }
