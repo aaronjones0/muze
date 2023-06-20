@@ -11,7 +11,7 @@ export default async function Page() {
     <>
       <h1 className='text-3xl font-black'>Manga</h1>
       <LinkButton label='Home' href='/' hotkey='h' />
-      <div className='flex flex-row flex-wrap gap-4 h-80'>
+      <div className='flex flex-row flex-wrap gap-4 justify-evenly justify-items-center h-80'>
         {manga.map((manga: Manga) => (
           <Link key={manga._id} href={`/manga/${manga._id}`}>
             <div className='group inline-block'>
