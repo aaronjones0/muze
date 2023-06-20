@@ -25,7 +25,7 @@ export default function ImageTile({ src, alt }: { src: string; alt: string }) {
           <img
             src={`${src}`}
             alt={alt}
-            className='shadow-md shadow-black ring-1 ring-neutral-900 absolute self-center justify-self-center w-auto z-10'
+            className='object-contain shadow-md shadow-black ring-1 ring-neutral-900 absolute self-center justify-self-center max-lg:h-full lg:w-auto z-10'
           />
           {/* </div> */}
           {/* <div */}
