@@ -32,7 +32,10 @@ export default async function Page({ params }: { params: { id: string } }) {
             Volume {manga.volume} of {manga.total_volumes}
           </li>
         </ol>
-        <LinkButton label='Home' href='/' />
+        <div className='mt-12 flex flex-row gap-8'>
+          <LinkButton label='Back' href='/manga' hotkey='b' />
+          <LinkButton label='Home' href='/' hotkey='h' />
+        </div>
       </div>
       <div className='basis-2/5'>
         <ImageTile

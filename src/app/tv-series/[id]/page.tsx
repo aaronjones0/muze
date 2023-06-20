@@ -20,7 +20,10 @@ export default async function Page({ params }: { params: { id: string } }) {
         <ul>
           <li>{tvSeries._id}</li>
         </ul>
-        <LinkButton label='Home' href='/' className='mt-12' />
+        <div className='mt-12 flex flex-row gap-8'>
+          <LinkButton label='Back' href='/tv-series' hotkey='b' />
+          <LinkButton label='Home' href='/' hotkey='h' />
+        </div>
       </div>
       <div className='basis-2/5'>
         <ImageTile

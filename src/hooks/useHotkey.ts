@@ -11,11 +11,13 @@ export default function useHotkey(
       if (event.altKey && event.key === key) {
         event.stopPropagation();
         event.preventDefault();
+        document.removeEventListener('keydown', handleKeyDown);
         onHotkeyPressed();
       } else if (event.altKey && event.key === 'Alt') {
         // Only the Alt key is pressed:
         event.stopPropagation();
         event.preventDefault();
+        document.removeEventListener('keydown', handleKeyDown);
         setHotkeyHintIsVisible(true);
       }
     },

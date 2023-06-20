@@ -42,11 +42,14 @@ export default async function Page({ params }: { params: { id: string } }) {
             Home
           </Link>
         </div> */}
-        <LinkButton label='Home' href='/' />
+        <div className='mt-12 flex flex-row gap-8'>
+          <LinkButton label='Back' href='/books' hotkey='b' />
+          <LinkButton label='Home' href='/' hotkey='h' />
+        </div>
       </div>
       <div className='h-full basis-2/5'>
         <ImageTile
-          src={`${book.cover_url}`}
+          src={`${book.cover_image_url}`}
           // src={`${book.cover_url}?blur=500`}
           alt={`${book.short_title} cover image`}
         />
@@ -66,7 +69,7 @@ async function getBookDetails(bookId: string) {
     isbn,
     publisher,
     notes,
-    "cover_url": cover_image.asset->url,
+    "cover_image_url": cover_image.asset->url,
     owned,
   }`);
 

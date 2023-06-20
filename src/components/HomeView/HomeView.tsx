@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 
-export default function SomeComp() {
+export default function HomeView() {
   const [s, setS] = useState('');
 
   return (

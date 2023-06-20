@@ -3,7 +3,7 @@ export interface Book {
   _id: string;
   authors?: any[];
   cover_image?: any;
-  cover_url?: string;
+  cover_image_url?: string;
   edition?: string;
   full_title?: string;
   isbn?: string;
