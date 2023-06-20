@@ -1,30 +1,30 @@
 import ImageCard from '@muze/components/ImageCard/ImageCard';
 import LinkButton from '@muze/components/LinkButton/LinkButton';
 import { sanity } from '@muze/lib/sanity-client';
-import { Book } from '@muze/model/Book';
+import { Manga } from '@muze/model/Manga';
 import Link from 'next/link';
 
 export default async function Page() {
-  const books: Book[] = await getBooks();
+  const manga = await getManga();
 
   return (
     <>
-      <h1 className='text-3xl font-black'>Books</h1>
+      <h1 className='text-3xl font-black'>Manga</h1>
       <LinkButton label='Home' href='/' hotkey='h' />
       <div className='flex flex-row flex-wrap gap-4 h-80'>
-        {books.map((book) => (
-          <Link key={book._id} href={`/books/${book._id}`}>
+        {manga.map((manga: Manga) => (
+          <Link key={manga._id} href={`/manga/${manga._id}`}>
             <div className='group inline-block'>
               {/* flex flex-col gap-2 */}
               <div>
                 <ImageCard
-                  src={`${book.cover_image_url}?h=280`}
-                  alt={`${book.short_title} cover image`}
+                  src={`${manga.front_cover_english_url}?h=280`}
+                  alt={`${manga.title_english} cover image`}
                 />
               </div>
               <div className='flex'>
                 <p className='group-hover:text-neutral-500 font-medium ml-3 text-ellipsis transition-colors pointer-events-none grow w-0'>
-                  {book.short_title}
+                  {manga.title_english}
                 </p>
               </div>
             </div>
@@ -35,11 +35,12 @@ export default async function Page() {
   );
 }
 
-async function getBooks() {
-  const books = sanity.fetch(`*[_type == "book"]{
+async function getManga() {
+  const manga = sanity.fetch(`*[_type == "manga"]{
     _id,
-    short_title,
-    "cover_image_url": cover_image.asset->url
+    title_english,
+    "front_cover_english_url": front_cover_english.asset->url,
   }`);
-  return books;
+
+  return manga;
 }

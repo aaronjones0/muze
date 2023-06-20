@@ -1,30 +1,28 @@
 import ImageCard from '@muze/components/ImageCard/ImageCard';
 import LinkButton from '@muze/components/LinkButton/LinkButton';
 import { sanity } from '@muze/lib/sanity-client';
-import { Book } from '@muze/model/Book';
+import { TVSeries } from '@muze/model/TVSeries';
 import Link from 'next/link';
 
 export default async function Page() {
-  const books: Book[] = await getBooks();
-
+  const tvSeries = await getTVSeries();
   return (
     <>
-      <h1 className='text-3xl font-black'>Books</h1>
+      <h1 className='text-3xl font-black'>TV Series&apos;</h1>
       <LinkButton label='Home' href='/' hotkey='h' />
       <div className='flex flex-row flex-wrap gap-4 h-80'>
-        {books.map((book) => (
-          <Link key={book._id} href={`/books/${book._id}`}>
+        {tvSeries.map((tvs: TVSeries) => (
+          <Link key={tvs._id} href={`/tv-series/${tvs._id}`}>
             <div className='group inline-block'>
-              {/* flex flex-col gap-2 */}
               <div>
                 <ImageCard
-                  src={`${book.cover_image_url}?h=280`}
-                  alt={`${book.short_title} cover image`}
+                  src={`${tvs.image_primary_url}?h=280`}
+                  alt={`${tvs.short_title} cover image`}
                 />
               </div>
               <div className='flex'>
                 <p className='group-hover:text-neutral-500 font-medium ml-3 text-ellipsis transition-colors pointer-events-none grow w-0'>
-                  {book.short_title}
+                  {tvs.short_title}
                 </p>
               </div>
             </div>
@@ -35,11 +33,11 @@ export default async function Page() {
   );
 }
 
-async function getBooks() {
-  const books = sanity.fetch(`*[_type == "book"]{
+async function getTVSeries() {
+  const tvSeries = sanity.fetch(`*[_type == "tvSeries"]{
     _id,
     short_title,
-    "cover_image_url": cover_image.asset->url
+    "image_primary_url": image_primary.asset->url
   }`);
-  return books;
+  return tvSeries;
 }

@@ -48,7 +48,7 @@ export default function LinkButton({
               className={[
                 roboto_mono.className,
                 'rounded-md h-6 w-6 border-2 overflow-hidden',
-                'bg-neutral-900 border-amber-400 text-amber-400',
+                'bg-neutral-900 border-amber-400 text-amber-400 shadow-md shadow-amber-400/30',
                 'align-middle text-center leading-none pt-0.5',
               ].join(' ')}
             >

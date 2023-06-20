@@ -27,6 +27,18 @@ export namespace MuzeCommands {
       description: 'View all Books in your Library.',
       href: '/books',
     },
+    {
+      code: '/v manga',
+      displayText: 'View all Manga',
+      description: 'View all Manga in your Library.',
+      href: '/manga',
+    },
+    {
+      code: '/v tvseries',
+      displayText: `View all TV Series'`,
+      description: `View all TV Series' in your Library.`,
+      href: '/tv-series',
+    },
   ];
 
   export const ValidDestinations: string[] = [
