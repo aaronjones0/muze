@@ -8,7 +8,10 @@ export default function SomeComp() {
 
   return (
     <>
-      <AppHeader command={s} onCommandChanged={(command) => setS(command)} />
+      <AppHeader
+        commandBarValue={s}
+        onCommandChanged={(command) => setS(command)}
+      />
     </>
   );
 }
