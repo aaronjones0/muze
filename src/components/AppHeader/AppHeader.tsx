@@ -1,51 +1,62 @@
 'use client';
 
-import Image from 'next/image';
+import { Transition } from '@headlessui/react';
 import { BoltIcon } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
-import LinkButton from '../LinkButton/LinkButton';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import HotkeyBadge from '../HotkeyBadge/HotkeyBadge';
-import { Transition } from '@headlessui/react';
+import { MuzeCommands } from '@muze/constants/muze-commands';
+import useHotkey from '@muze/hooks/useHotkey';
+import { MuzeCommand } from '@muze/interfaces/MuzeCommand';
 import { roboto_mono } from '@muze/lib/fonts';
+import Image from 'next/image';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import LinkButton from '../LinkButton/LinkButton';
+import { MuzeAction } from '@muze/interfaces/MuzeAction';
+import { useRouter } from 'next/navigation';
 
 export default function AppHeader({
-  command,
+  commandBarValue,
   onCommandChanged,
 }: {
-  command: string;
+  commandBarValue: string;
   onCommandChanged: (command: string) => void;
 }) {
-  const [hotkeysActive, setHotkeysActive] = useState(false);
-
+  const router = useRouter();
   const commandInput = useRef<HTMLInputElement>(null);
   const [commanding, setCommanding] = useState(false);
+  const [command, setCommand] = useState<MuzeCommand | null>(null);
+  const [action, setAction] = useState<MuzeAction | null>(null);
 
-  const handleKeyPress = useCallback((event: KeyboardEvent) => {
-    if (event.key === '/' && event.altKey && !!commandInput.current) {
-      event.stopPropagation();
-      event.preventDefault(); // Do not type the "/" in the input.
-      commandInput.current.focus();
-    } else if (event.altKey) {
-      setHotkeysActive(true);
-    }
+  const getCommandFromString = useCallback((s: string) => {
+    return MuzeCommands.ValidCommands.find(
+      (c) => c.code === s.substring(0, 2).toLowerCase()
+    );
   }, []);
 
-  const handleKeyUp = useCallback((event: KeyboardEvent) => {
-    if (!event.altKey) {
-      event.stopPropagation();
-      event.preventDefault();
-      setHotkeysActive(false);
-    }
+  const getAction = useCallback((s: string) => {
+    return MuzeCommands.ValidActions.find((a) => a.code === s.toLowerCase());
   }, []);
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress);
-  }, [handleKeyPress]);
+  const { hotkeyHintIsVisible } = useHotkey('/', () =>
+    commandInput.current?.focus()
+  );
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'Enter' && !!action) {
+        event.preventDefault();
+        event.stopPropagation();
+        document.removeEventListener('keydown', handleKeyDown);
+        router.push(action.href);
+      }
+    },
+    [router, action]
+  );
 
   useEffect(() => {
-    document.addEventListener('keyup', handleKeyUp);
-  }, [handleKeyUp]);
+    if (action !== null) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+  }, [action, handleKeyDown]);
 
   return (
     <>
@@ -60,33 +71,33 @@ export default function AppHeader({
         <div
           className={[
             'relative rounded-full h-min w-full',
-            // 'shadow-ncs-sm',
             'border-2 border-neutral-800',
           ].join(' ')}
         >
           <div
             className={[
               'flex flex-row-reverse items-center gap-2 rounded-full',
-              // 'shadow-nch-sm',
               'shadow-inner shadow-black',
               'overflow-hidden pl-3 pr-4 py-2 h-min w-full',
             ].join(' ')}
           >
-            {/* {hotkeysActive ? ( */}
             <Transition
               appear={true}
-              show={hotkeysActive}
+              show={hotkeyHintIsVisible}
               enter='transition-opacity duration-75'
               enterFrom='opacity-0 scale-75'
               enterTo='opacity-100 scale-100'
               leave='transition-opacity duration-150'
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-75'
-              className='rounded-md h-6 w-6 border-2 overflow-hidden bg-neutral-900 border-amber-400 text-amber-400 align-middle text-center leading-none pt-0.5'
+              className={[
+                'rounded-md h-6 w-6 border-2 overflow-hidden',
+                'bg-neutral-900 border-amber-400 text-amber-400',
+                'align-middle text-center leading-none pt-0.5',
+              ].join(' ')}
             >
               <p className={roboto_mono.className}>/</p>
             </Transition>
-            {/* ) : null} */}
             <input
               ref={commandInput}
               type='text'
@@ -96,8 +107,16 @@ export default function AppHeader({
                   ? `font-medium focus:text-amber-400 text-amber-600`
                   : 'text-neutral-500',
               ].join(' ')}
-              value={command}
+              value={commandBarValue}
               onChange={(e) => {
+                // console.log('e.target.value:');
+                // console.log(e.target.value);
+                // console.log('action:');
+                // console.log(action);
+                // console.log('command:');
+                // console.log(command);
+                setCommand(getCommandFromString(e.target.value) ?? null);
+                setAction(getAction(e.target.value) ?? null);
                 setCommanding(e.target.value.startsWith('/'));
                 onCommandChanged(e.target.value);
               }}
@@ -110,7 +129,6 @@ export default function AppHeader({
                   : 'peer-focus:text-neutral-500',
               ].join(' ')}
             />
-            {/* <MagnifyingGlassIcon className='peer-focus:text-neutral-500 h-6 w-6' /> */}
           </div>
         </div>
         <LinkButton label='Add' href='/add-entry' hotkey='a' />
@@ -119,16 +137,16 @@ export default function AppHeader({
         <div className='ml-36 flex flex-row gap-1'>
           <p>
             <span className='bg-amber-400 text-neutral-900 rounded-lg p-1'>
-              {command.toLowerCase() === '/g books'
-                ? 'Go to Books'
-                : command.startsWith('/g')
-                ? 'Go to...'
-                : '...'}
+              {!!action
+                ? action.displayText
+                : !!command
+                ? `${command.displayText} ...`
+                : ''}
             </span>
           </p>
           <Transition
             appear={true}
-            show={command.toLowerCase() === '/g books'}
+            show={!!action}
             enter='transition-opacity duration-75'
             enterFrom='opacity-0 scale-75'
             enterTo='opacity-100 scale-100'

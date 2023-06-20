@@ -1,10 +1,10 @@
 'use client';
 
 import { Transition } from '@headlessui/react';
+import useHotkey from '@muze/hooks/useHotkey';
 import { roboto_mono } from '@muze/lib/fonts';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
 
 export default function LinkButton({
   label,
@@ -18,38 +18,7 @@ export default function LinkButton({
   hotkey?: string;
 }) {
   const router = useRouter();
-  const [hotkeyActive, setHotkeyActive] = useState(false);
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.altKey && event.key === hotkey) {
-        event.stopPropagation();
-        event.preventDefault();
-        router.push(href);
-      } else if (event.altKey) {
-        event.stopPropagation();
-        event.preventDefault();
-        setHotkeyActive(true);
-      }
-    },
-    [hotkey, href, router]
-  );
-
-  const handleKeyUp = useCallback((event: KeyboardEvent) => {
-    if (!event.altKey) {
-      event.stopPropagation();
-      event.preventDefault();
-      setHotkeyActive(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
-
-  useEffect(() => {
-    document.addEventListener('keyup', handleKeyUp);
-  }, [handleKeyUp]);
+  const { hotkeyHintIsVisible } = useHotkey(hotkey, () => router.push(href));
 
   return (
     <div
@@ -67,7 +36,7 @@ export default function LinkButton({
       {hotkey ? (
         <div className='absolute -top-4 -right-4'>
           <Transition
-            show={hotkeyActive}
+            show={hotkeyHintIsVisible}
             enter='transition-opacity duration-75'
             enterFrom='opacity-0 scale-75'
             enterTo='opacity-100 scale-100'
