@@ -27,13 +27,19 @@ export default function AppHeader({
   const [action, setAction] = useState<MuzeAction | null>(null);
 
   const getCommandFromString = useCallback((s: string) => {
-    return MuzeCommands.ValidCommands.find(
+    const cmd = MuzeCommands.ValidCommands.find(
       (c) => c.code === s.substring(0, 2).toLowerCase()
     );
+
+    return cmd ?? null;
   }, []);
 
   const getAction = useCallback((s: string) => {
-    return MuzeCommands.ValidActions.find((a) => a.code === s.toLowerCase());
+    const action = MuzeCommands.ValidActions.find(
+      (a) => a.code === s.toLowerCase()
+    );
+
+    return action ?? null;
   }, []);
 
   const { hotkeyHintIsVisible } = useHotkey('/', () =>
@@ -46,17 +52,18 @@ export default function AppHeader({
         event.preventDefault();
         event.stopPropagation();
         document.removeEventListener('keydown', handleKeyDown);
+        console.log(action);
         router.push(action.href);
+      } else {
+        document.removeEventListener('keydown', handleKeyDown);
       }
     },
-    [router, action]
+    [action, router]
   );
 
   useEffect(() => {
-    if (action !== null) {
-      document.addEventListener('keydown', handleKeyDown);
-    }
-  }, [action, handleKeyDown]);
+    document.addEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <>
@@ -141,7 +148,7 @@ export default function AppHeader({
                 ? action.displayText
                 : !!command
                 ? `${command.displayText} ...`
-                : ''}
+                : '...'}
             </span>
           </p>
           <Transition

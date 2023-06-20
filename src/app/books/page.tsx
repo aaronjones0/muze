@@ -1,3 +1,4 @@
+import LinkButton from '@muze/components/LinkButton/LinkButton';
 import { sanity } from '@muze/lib/sanity-client';
 import { Book } from '@muze/model/Book';
 
@@ -5,11 +6,14 @@ export default async function Page() {
   const books: Book[] = await getBooks();
 
   return (
-    <ul>
-      {books.map((book) => (
-        <li key={book._id}>{book.short_title}</li>
-      ))}
-    </ul>
+    <>
+      <LinkButton label='Home' href='/' hotkey='h' />
+      <ul>
+        {books.map((book) => (
+          <li key={book._id}>{book.short_title}</li>
+        ))}
+      </ul>
+    </>
   );
 }
 
