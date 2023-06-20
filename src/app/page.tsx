@@ -3,7 +3,6 @@
 import { LifebuoyIcon } from '@heroicons/react/24/outline';
 import HomeView from '@muze/components/HomeView/HomeView';
 import ImageCard from '@muze/components/ImageCard/ImageCard';
-import LinkButton from '@muze/components/LinkButton/LinkButton';
 import C from '@muze/components/TextFormatting/Code';
 import Link from 'next/link';
 
