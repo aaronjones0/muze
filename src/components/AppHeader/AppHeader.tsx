@@ -154,7 +154,7 @@ export default function AppHeader({
           <Transition
             appear={true}
             show={!!action}
-            enter='transition-opacity duration-75'
+            enter='transition-opacity duration-150'
             enterFrom='opacity-0 scale-75'
             enterTo='opacity-100 scale-100'
             leave='transition-opacity duration-150'
