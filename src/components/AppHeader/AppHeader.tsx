@@ -79,7 +79,7 @@ export default function AppHeader({
         <div
           className={[
             'grow relative rounded-full h-min w-full',
-            'border-2 border-neutral-800',
+            'border-b-2 border-r border-neutral-800',
           ].join(' ')}
         >
           <div

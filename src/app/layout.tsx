@@ -2,18 +2,6 @@
 import { inter } from '@muze/lib/fonts';
 import './globals.css';
 
-// const inter = Inter({
-//   subsets: ['latin'],
-//   display: 'swap',
-//   variable: '--font-inter',
-// });
-
-// export const roboto_mono = Roboto_Mono({
-//   subsets: ['latin'],
-//   display: 'swap',
-//   variable: '--font-roboto-mono',
-// });
-
 export const metadata = {
   title: 'Muze',
   description: 'Muze',
