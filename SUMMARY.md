@@ -13,7 +13,8 @@
 ## Technical Documentation
 
 * [Tech Stack](technical-documentation/tech-stack.md)
-* [NextJS](technical-documentation/readme.md)
+* [NextJS](technical-documentation/technical-documentation/README.md)
+  * [Next Auth](technical-documentation/technical-documentation/next-auth.md)
 * [Sanity](technical-documentation/sanity/README.md)
   * [Connecting content to NextJS](technical-documentation/sanity/connecting-content-to-nextjs.md)
   * [Designing a Document Database](technical-documentation/sanity/designing-a-document-database.md)
