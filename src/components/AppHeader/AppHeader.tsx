@@ -92,7 +92,7 @@ export default function AppHeader({
             {commanding ? (
               <div className='absolute -bottom-10 left-0 flex flex-row gap-1'>
                 <p>
-                  <span className='bg-amber-400 text-neutral-900 rounded-lg p-1'>
+                  <span className='bg-amber-500 text-neutral-900 rounded-lg p-1'>
                     {!!action
                       ? action.displayText
                       : !!command
@@ -125,7 +125,7 @@ export default function AppHeader({
               leaveTo='opacity-0 scale-75'
               className={[
                 'rounded-md h-6 w-6 border-2 overflow-hidden',
-                'bg-neutral-900 border-amber-400 text-amber-400 shadow-md shadow-amber-400/30',
+                'bg-neutral-900 border-amber-500 text-amber-500 shadow-md shadow-amber-500/30',
                 'align-middle text-center leading-none pt-0.5',
               ].join(' ')}
             >
@@ -137,7 +137,7 @@ export default function AppHeader({
               className={[
                 `peer bg-neutral-900 outline-none w-full ${roboto_mono.className}`,
                 commanding
-                  ? `font-medium focus:text-amber-400 text-amber-600`
+                  ? `font-medium focus:text-amber-500 text-amber-600`
                   : 'text-neutral-500',
               ].join(' ')}
               value={commandBarValue}
@@ -152,7 +152,7 @@ export default function AppHeader({
               className={[
                 'h-6 w-6',
                 commanding
-                  ? 'peer-focus:text-amber-400'
+                  ? 'peer-focus:text-amber-500'
                   : 'peer-focus:text-neutral-500',
               ].join(' ')}
             />
@@ -194,7 +194,7 @@ export default function AppHeader({
               leaveTo='opacity-0 scale-75'
               className={[
                 'rounded-md h-6 w-6 border-2 overflow-hidden',
-                'bg-neutral-900 border-amber-400 text-amber-400 shadow-md shadow-amber-400/30',
+                'bg-neutral-900 border-amber-500 text-amber-500 shadow-md shadow-amber-500/30',
                 'align-middle text-center leading-none pt-0.5',
               ].join(' ')}
             >
@@ -206,7 +206,7 @@ export default function AppHeader({
               className={[
                 `peer bg-neutral-900 outline-none w-full ${roboto_mono.className}`,
                 commanding
-                  ? `font-medium focus:text-amber-400 text-amber-600`
+                  ? `font-medium focus:text-amber-500 text-amber-600`
                   : 'text-neutral-500',
               ].join(' ')}
               value={commandBarValue}
@@ -227,7 +227,7 @@ export default function AppHeader({
               className={[
                 'h-6 w-6',
                 commanding
-                  ? 'peer-focus:text-amber-400'
+                  ? 'peer-focus:text-amber-500'
                   : 'peer-focus:text-neutral-500',
               ].join(' ')}
             />
@@ -238,7 +238,7 @@ export default function AppHeader({
       {commanding ? (
         <div className='ml-28 md:ml-36 flex flex-row gap-1'>
           <p>
-            <span className='bg-amber-400 text-neutral-900 rounded-lg p-1'>
+            <span className='bg-amber-500 text-neutral-900 rounded-lg p-1'>
               {!!action
                 ? action.displayText
                 : !!command

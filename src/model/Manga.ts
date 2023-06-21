@@ -1,3 +1,6 @@
+import { Artist } from "./Artist";
+import { Publisher } from "./Publisher";
+
 export interface Manga {
   _id: string;
   title_english?: string;
@@ -11,4 +14,7 @@ export interface Manga {
   total_volumes?: number;
   is_omnibus?: boolean;
   have_read?: boolean;
+  mangaka?: Artist;
+  author?: Artist;
+  publisher?: Publisher;
 }
