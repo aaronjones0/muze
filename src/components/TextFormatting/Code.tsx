@@ -9,7 +9,7 @@ export default function C({
     <span
       className={[
         roboto_mono.className,
-        'bg-neutral-800/50 rounded-md p-1',
+        'bg-neutral-800/50 rounded-md px-1 py-0.5',
       ].join(' ')}
     >
       {children}
