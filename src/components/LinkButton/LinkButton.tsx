@@ -29,7 +29,7 @@ export default function LinkButton({
     >
       <Link
         href={href}
-        className='shadow-ns-md border-t-2 border-neutral-800 hover:border-neutral-700 px-3 py-2 rounded-full text-neutral-400 hover:text-neutral-300 bg-neutral-900 hover:bg-neutral-800 w-fit'
+        className='shadow-ns-md border-t-2 border-l border-neutral-800 hover:border-neutral-700 px-3 py-2 rounded-full text-neutral-400 hover:text-neutral-300 bg-neutral-900 hover:bg-neutral-800 w-fit'
       >
         {label}
       </Link>

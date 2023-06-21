@@ -1,11 +1,14 @@
 # Table of contents
 
-* [Welcome to Muze](README.md)
+* [✨ Welcome to Muze!](README.md)
 
 ## The Muze Library
 
+* [Quick Start](the-muze-library/quick-start.md)
 * [Library Entries](the-muze-library/library-entries/README.md)
+  * [Book](the-muze-library/library-entries/book.md)
   * [Manga](the-muze-library/library-entries/manga.md)
+  * [TV Series](the-muze-library/library-entries/tv-series.md)
 
 ## Technical Documentation
 
