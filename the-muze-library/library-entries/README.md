@@ -15,7 +15,10 @@
 | Movie             |                                                           |                                                                                                                        |
 | Podcast           |                                                           |                                                                                                                        |
 | Podcast Episode   |                                                           |                                                                                                                        |
+| Puzzle            |                                                           |                                                                                                                        |
+| Lego Set          |                                                           |                                                                                                                        |
 | Recipe            |                                                           |                                                                                                                        |
+| Tabletop RPG      |                                                           |                                                                                                                        |
 | Tabletop Game     |                                                           |                                                                                                                        |
 | TV Series         | Live-action comedy, anime, miniseries, documentary series | An episodic narrative that aired on television.                                                                        |
 | TV Series Episode | A single episode of any of the TV Series examples         | One episode of a TV Series.                                                                                            |
