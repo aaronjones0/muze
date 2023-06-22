@@ -14,3 +14,10 @@ Working `<SessionProvider>` example
 Built-in OAuth Providers
 {% endembed %}
 
+## Generating random strings
+
+A good method is `openssl`:
+
+```bash
+openssl rand -base64 32
+```
