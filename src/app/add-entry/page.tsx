@@ -48,7 +48,7 @@ export default function Page() {
         <h1 className='pointer-events-none select-none text-3xl font-black text-neutral-500'>
           What would you like to add?
         </h1>
-        <LinkButton label='Cancel' href='/' hotkey='c' />
+        <LinkButton label='Cancel' href='/home' hotkey='c' />
       </div>
       <div className='place-content-center flex flex-row flex-wrap gap-4 my-4'>
         {/* <div className='grid grid-flow-col auto-cols-fr gap-4 my-4'> */}

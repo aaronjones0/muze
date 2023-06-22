@@ -34,7 +34,7 @@ export default function Me() {
       <h1 className='text-4xl font-black'>Profile</h1>
       <p className='font-black'>{session.user?.name}</p>
       <p className='font-light'>{session.user?.email}</p>
-      <LinkButton label='Home' href='/' hotkey='h' />
+      <LinkButton label='Home' href='/home' hotkey='h' />
     </div>
   );
 }

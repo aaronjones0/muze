@@ -48,7 +48,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
           <div className='mt-4 flex flex-row gap-8'>
             <LinkButton label='Back' href='/manga' hotkey='b' />
-            <LinkButton label='Home' href='/' hotkey='h' />
+            <LinkButton label='Home' href='/home' hotkey='h' />
           </div>
         </div>
       </div>

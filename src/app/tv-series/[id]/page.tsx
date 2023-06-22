@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </h2>
           <div className='flex flex-row gap-8 mt-4'>
             <LinkButton label='Back' href='/tv-series' hotkey='b' />
-            <LinkButton label='Home' href='/' hotkey='h' />
+            <LinkButton label='Home' href='/home' hotkey='h' />
           </div>
         </div>
         <ul>
