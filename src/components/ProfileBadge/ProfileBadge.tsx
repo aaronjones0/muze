@@ -6,7 +6,7 @@ import { Session } from 'next-auth';
 
 export default function ProfileBadge({ session }: { session: Session }) {
   return (
-    <Link href='/me'>
+    <Link href='/me' className='w-fit'>
       <div className='group cursor-pointer shadow-nh-md rounded-full w-fit mt-4 border-t-2 border-l border-neutral-700'>
         <div className='rounded-full w-fit flex flex-row items-center gap-3 p-3 bg-neutral-900 shadow-ns-md shadow-black'>
           {session.user?.image && (
