@@ -2,6 +2,7 @@
 
 import { LifebuoyIcon } from '@heroicons/react/24/outline';
 import FrontDoor from '@muze/components/FrontDoor/FrontDoor';
+import HeroButton from '@muze/components/HeroButton/HeroButton';
 import HomeView from '@muze/components/HomeView/HomeView';
 import ImageCard from '@muze/components/ImageCard/ImageCard';
 import ProcessingIndicator from '@muze/components/ProcessingIndicator/ProcessingIndicator';
@@ -96,8 +97,10 @@ export default async function Home() {
               The Account with which you signed in does not have a Library.
               Would you like to sign up?
             </p>
-            <p>Sign up</p>
-            <p>Sign out</p>
+            <div className='flex flex-row items-center gap-3'>
+              <HeroButton label='Sign up' href='/sign-up' primary />
+              <HeroButton label='Sign out' href='/api/auth/signout' />
+            </div>
           </>
         )}
       </>
@@ -108,7 +111,8 @@ export default async function Home() {
 }
 
 async function getUser(userEmail: string) {
-  const userRequest = sanity.fetch(`*[_type == "user" && email == "${userEmail}"]{
+  const userRequest =
+    sanity.fetch(`*[_type == "user" && email == "${userEmail}"]{
     _id,
     full_name,
     email,

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import HeroButton from '../HeroButton/HeroButton';
 
 export default function FrontDoor() {
   return (
@@ -14,14 +14,15 @@ export default function FrontDoor() {
           height={963}
           width={484}
         />
-        <Link href='/api/auth/signin' className='group'>
+        <HeroButton label='Enter' href='/api/auth/signin' />
+        {/* <Link href='/api/auth/signin' className='group'>
           <div className='cursor-pointer h-12 w-52 rounded-2xl bg-neutral-900 relative flex items-center justify-center border-t-2 border-l border-neutral-800'>
             <p className='text-amber-500/90 group-hover:text-amber-500 font-black transition-colors'>
               Enter
             </p>
             <div className='rounded-2xl absolute top-0 bottom-0 left-0 right-0 shadow-md shadow-amber-500 animate-pulse flex flex-row items-center justify-center'></div>
           </div>
-        </Link>
+        </Link> */}
         {/* <Link href='/api/auth/sign-up' className='group'>
           <div className='shadow-nh-md rounded-2xl h-12 w-52'>
             <div className='h-full w-full shadow-ns-md rounded-2xl flex items-center justify-center'>
