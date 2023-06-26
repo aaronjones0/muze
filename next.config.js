@@ -7,6 +7,12 @@ const nextConfig = {
         hostname: 'cdn.discordapp.com',
         port: '',
         pathname: '/avatars/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '/**'
       }
     ]
   }

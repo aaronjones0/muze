@@ -1,4 +1,4 @@
-import { SessionProvider } from 'next-auth/react';
+// import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
 import { headers } from 'next/headers';
 import AuthContext from './AuthContext';

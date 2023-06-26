@@ -1,20 +1,16 @@
-'use client';
-
 import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import useRequiredSession from '@muze/hooks/useRequiredSession';
-import useSignup from '@muze/hooks/useSignup';
+import useSanityWriteClient from '@muze/hooks/useSanityWriteClient';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Input from '../Input/Input';
 import ProcessingIndicator from '../ProcessingIndicator/ProcessingIndicator';
-import useSanityWriteClient from '@muze/hooks/useSanityWriteClient';
-import { useRouter } from 'next/navigation';
 
 export default function Signup() {
   const { session, status } = useRequiredSession();
 
-  const signUpNewUser = useSignup();
-  const sanityWrite = useSanityWriteClient();
+  const sanityWrite = useSanityWriteClient(process.env.SANITY_API_TOKEN ?? '');
   const router = useRouter();
 
   const [fullName, setFullName] = useState(session?.user?.name ?? '');
@@ -22,7 +18,7 @@ export default function Signup() {
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState(session?.user?.name ?? '');
-  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [profileImage, setProfileImage] = useState<Blob | null>(null);
 
   if (status === 'loading') {
     return <ProcessingIndicator text='Processing...' />;
@@ -119,12 +115,6 @@ export default function Signup() {
         <button
           className='text-neutral-500'
           onClick={() => {
-            // console.log(
-            //   `FN: ${firstName} | MN: ${middleName} | LN: ${lastName} | UN: ${username} | Email: ${
-            //     session.user?.email ?? undefined
-            //   } | Profile Photo: ${profileImage ?? undefined}`
-            // );
-
             console.log(
               JSON.stringify({
                 mutations: [
@@ -137,6 +127,7 @@ export default function Signup() {
                       last_name: lastName,
                       username: username,
                       email: session.user?.email ?? undefined,
+                      profile_image: profileImage,
                     },
                   },
                 ],
@@ -150,29 +141,36 @@ export default function Signup() {
               `https://${spid}.api.sanity.io/v${apiv}/data/mutate/${ds}`
             );
 
-            sanityWrite
-              .create({
-                _type: 'user',
-                full_name: fullName,
-                first_name: firstName,
-                middle_name: middleName,
-                last_name: lastName,
-                username: username,
-                email: session.user?.email ?? '',
-              })
-              .then((doc) => {
-                router.push('/');
-              });
-
-            // signUpNewUser(
-            //   fullName,
-            //   firstName,
-            //   middleName,
-            //   lastName,
-            //   username,
-            //   session.user?.email ?? undefined,
-            //   profileImage ?? undefined
-            // );
+            if (profileImage) {
+              sanityWrite.assets
+                .upload('image', profileImage, {
+                  contentType: 'image',
+                  filename: profileImage.name,
+                })
+                .then((document) => {
+                  console.log(document);
+                  sanityWrite
+                    .create({
+                      _type: 'user',
+                      full_name: fullName,
+                      first_name: firstName,
+                      middle_name: middleName,
+                      last_name: lastName,
+                      username: username,
+                      email: session.user?.email ?? '',
+                      profile_image: {
+                        _type: 'image',
+                        asset: {
+                          _type: 'reference',
+                          _ref: document._id,
+                        },
+                      },
+                    })
+                    .then((doc) => {
+                      router.push('/');
+                    });
+                });
+            }
           }}
         >
           Sign up

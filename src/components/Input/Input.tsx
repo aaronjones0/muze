@@ -1,6 +1,6 @@
 'use client';
 
-// import { roboto_mono } from '@muze/lib/fonts';
+import { roboto_mono } from '@muze/lib/fonts';
 import { ChangeEventHandler } from 'react';
 
 export default function Input({
@@ -42,7 +42,7 @@ export default function Input({
           type='text'
           className={[
             'peer bg-neutral-900 outline-none w-full',
-            // `${roboto_mono.className}`,
+            `${roboto_mono.className}`,
             'text-neutral-500',
           ].join(' ')}
           value={value}
