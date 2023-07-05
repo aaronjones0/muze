@@ -68,23 +68,53 @@ export async function POST(request: Request) {
 The client-side posts via the NextJS API Route, keeping the SWT out of the client-side bundle so it isn't exposed:
 
 ```typescript
-// Within a client component:
-if (!profileImage) {
-  return;
-}
+// Within any client component or page:
 
-try {
-  const response = await fetch(`/api/assets/profile-image`, { // ⬅️ NextJS API Route
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/octet-stream', // ⬅️ Data type of the request body
-    },
-    body: await profileImage.arrayBuffer(),
-  });
+import { useState } from 'react';
 
-  const result = await response.json();
-  console.log('Success:', result);
-} catch (error) {
-  console.log(error);
-}
+const [profileImage, setProfileImage] = useState<Blob | null>(null);
+
+return (
+  {/* ... */}
+  <input
+    type='file'
+    name='profileImageInput'
+    onChange={(event) => {
+      setProfileImage(
+        event.target.files ? event.target.files[0] : null
+      );
+    }}
+  />
+  {/* ... */}
+  <button
+    onClick={async () => {
+      if (!profileImage) {
+        return;
+      }
+      
+      try {
+        // ⬇️️ NextJS API Route
+        const response = await fetch(`/api/assets/profile-image`, {
+          method: 'POST',
+          headers: {
+            // ⬇️ Data type of the request body
+            'Content-Type': 'application/octet-stream',
+          },
+          /* ⬇️ We have to post profileImage.arrayBuffer(), because profileImage
+           * contains the metadata of the image. The buffer is the binary data 
+           * of the image itself.
+           */
+          body: await profileImage.arrayBuffer(),
+        });
+      
+        const result = await response.json();
+        console.log('Success:', result);
+      } catch (error) {
+        console.log(error);
+      }
+    }}>
+    Upload Image
+  </button>
+  {/* ... */}
+);
 ```
