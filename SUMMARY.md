@@ -22,3 +22,4 @@
   * [Connecting content to NextJS](technical-documentation/sanity/connecting-content-to-nextjs.md)
   * [Designing a Document Database](technical-documentation/sanity/designing-a-document-database.md)
   * [GROQ Queries in Sanity](technical-documentation/sanity/groq-queries-in-sanity.md)
+  * [Assets and Server-Side Client](technical-documentation/sanity/assets-and-server-side-client.md)
