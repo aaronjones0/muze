@@ -2,7 +2,7 @@
 
 ## Server-Side Sanity Write Client
 
-We import `server-only` to enforce keeping the write token out of the client-side bundle so it remains secret, because the write token is per-tenant and not per-user:
+We import `server-only` to enforce keeping the Sanity Write Token (SWT) out of the client-side bundle so it remains secret, because the SWT is per-tenant and not per-user:
 
 ```typescript
 import 'server-only';
@@ -63,7 +63,7 @@ export async function POST(request: Request) {
 
 ## Posting an asset to the API Route
 
-The client-side posts via the NextJS API Route, keeping the Sanity Write Token out of the client-side bundle so it isn't exposed:
+The client-side posts via the NextJS API Route, keeping the SWT out of the client-side bundle so it isn't exposed:
 
 ```typescript
 // Within a client component:
