@@ -5,6 +5,8 @@
 We import `server-only` to enforce keeping the Sanity Write Token (SWT) out of the client-side bundle so it remains secret, because the SWT is per-tenant and not per-user:
 
 ```typescript
+// ~/src/hooks/useSanityWriteClient.ts
+
 import 'server-only';
 import { createClient } from 'next-sanity';
 
