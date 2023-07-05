@@ -1,13 +1,19 @@
 'use client';
 
 import ProcessingIndicator from '@muze/components/ProcessingIndicator/ProcessingIndicator';
-import useRequiredSession from '@muze/hooks/useRequiredSession';
+import UserSignupForm from '@muze/components/UserSignupForm/UserSignupForm';
 import { sanity } from '@muze/lib/sanity-client';
 import { User } from '@muze/model/User';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 export default async function Page() {
-  const { session, status } = useRequiredSession();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      signIn();
+    },
+  });
 
   if (status === 'loading') {
     return <ProcessingIndicator text='Processing' />;
@@ -33,7 +39,7 @@ export default async function Page() {
       return (
         <>
           <p className='text-neutral-50'>Sign up? (Existing session.)</p>
-          <Link
+          {/* <Link
             href={{
               pathname: '/sign-up',
               query: {
@@ -43,7 +49,11 @@ export default async function Page() {
             }}
           >
             Sign up
-          </Link>
+          </Link> */}
+          <UserSignupForm
+            email={session.user?.email ?? ''}
+            username={session.user?.name ?? ''}
+          />
           <Link href='/api/auth/signout'>Sign out</Link>
         </>
       );

@@ -24,9 +24,10 @@ export default function AppHeader() {
     }
    */
   const router = useRouter();
+
   const commandInput = useRef<HTMLInputElement>(null);
   const [commanding, setCommanding] = useState(false);
-  const [command, setCommand] = useState<MuzeCommand | null>(null);
+  const [command, setCommand] = useState<MuzeCommand | undefined>(undefined);
   const [action, setAction] = useState<MuzeAction | null>(null);
 
   const getCommandFromString = useCallback((s: string) => {
@@ -143,12 +144,13 @@ export default function AppHeader() {
                   ? `font-medium focus:text-amber-500 text-amber-600`
                   : 'text-neutral-500',
               ].join(' ')}
-              value={commandBarValue}
+              value={command?.code}
+              // value={commandBarValue}
               onChange={(e) => {
-                setCommand(getCommandFromString(e.target.value) ?? null);
+                setCommand(getCommandFromString(e.target.value) ?? undefined);
                 setAction(getAction(e.target.value) ?? null);
                 setCommanding(e.target.value.startsWith('/'));
-                onCommandChanged(e.target.value);
+                // onCommandChanged(e.target.value);
               }}
             />
             <BoltIcon

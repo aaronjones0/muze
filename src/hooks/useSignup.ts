@@ -22,31 +22,31 @@ export default function Signup() {
       email: email,
     });
 
-    // fetch('/api/users/create-user', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     mutations: [
-    //       {
-    //         create: {
-    //           _type: 'user',
-    //           full_name: fullName,
-    //           first_name: firstName,
-    //           middle_name: middleName,
-    //           last_name: lastName,
-    //           username: username,
-    //           email: email,
-    //           // profile_image: profilePhoto,
-    //         },
-    //       },
-    //     ],
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => console.log(result))
-    //   .catch((error) => console.error(error));
+    fetch('/api/users/create-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        mutations: [
+          {
+            create: {
+              _type: 'user',
+              full_name: fullName,
+              first_name: firstName,
+              middle_name: middleName,
+              last_name: lastName,
+              username: username,
+              email: email,
+              // profile_image: profilePhoto,
+            },
+          },
+        ],
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
   };
 
   return signUpNewUser;

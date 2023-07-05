@@ -1,25 +1,17 @@
 'use client';
 
-import Image from 'next/image';
-import { useState } from 'react';
-import Input from '../Input/Input';
 import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
+import Input from '../Input/Input';
+import FieldLabel from '../FieldLabel/FieldLabel';
 
 export default function UserSignupForm({
   email,
   username,
-  onSubmit,
 }: {
   email: string;
   username?: string;
-  onSubmit: (
-    fullName: string,
-    firstName: string,
-    middleName: string,
-    lastName: string,
-    username: string,
-    profileImage: Blob | null
-  ) => void;
 }) {
   const [fullName, setFullName] = useState(username ?? '');
   const [firstName, setFirstName] = useState('');
@@ -28,42 +20,59 @@ export default function UserSignupForm({
   const [newUsername, setUsername] = useState(username ?? '');
   const [profileImage, setProfileImage] = useState<Blob | null>(null);
 
+  const fileField = useRef<HTMLInputElement | null>(null);
+
   return (
     <div className='flex flex-col gap-4'>
-      <Input
-        required
-        label='Full Name'
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-      />
-      <Input
-        label='First Name'
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
-      <Input
-        label='Middle Name'
-        value={middleName}
-        onChange={(e) => setMiddleName(e.target.value)}
-      />
-      <Input
-        label='Last Name'
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-      />
-      <Input
-        required
-        label='Username'
-        value={newUsername}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <Input
-        required
-        label='Email'
-        value={email}
-        onChange={(e) => {}}
-        disabled
-      />
+      <FieldLabel label='Full Name' required>
+        <Input
+          id='fullNameInput'
+          label='Full Name'
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+        />
+      </FieldLabel>
+      <FieldLabel label='First Name'>
+        <Input
+          id='firstNameInput'
+          label='First Name'
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+      </FieldLabel>
+      <FieldLabel label='Middle Name'>
+        <Input
+          id='middleNameInput'
+          label='Middle Name'
+          value={middleName}
+          onChange={(e) => setMiddleName(e.target.value)}
+        />
+      </FieldLabel>
+      <FieldLabel label='Last Name'>
+        <Input
+          id='lastNameInput'
+          label='Last Name'
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+      </FieldLabel>
+      <FieldLabel label='Username' required>
+        <Input
+          id='usernameInput'
+          label='Username'
+          value={newUsername}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </FieldLabel>
+      <FieldLabel label='Email'>
+        <Input
+          id='emailInput'
+          label='Email'
+          value={email}
+          onChange={(e) => {}}
+          disabled
+        />
+      </FieldLabel>
       <label className='flex flex-col gap-2 pl-3'>
         <span className='text-neutral-500'>Profile Image</span>
         <div className='flex flex-row items-center gap-4'>
@@ -87,6 +96,7 @@ export default function UserSignupForm({
                 <ArrowUpTrayIcon className='h-6 w-6 text-neutral-700 group-hover:text-neutral-500' />
               )}
               <input
+                ref={fileField}
                 className={[
                   'cursor-pointer absolute h-full w-full opacity-0',
                 ].join(' ')}
@@ -107,8 +117,69 @@ export default function UserSignupForm({
           >
             <XMarkIcon className='h-6 w-6' /> Remove
           </button>
+          {profileImage && <p>Image size: {profileImage.size / 1000000} MB</p>}
         </div>
       </label>
+      <button
+        className='w-fit rounded-full bg-neutral-800 hover:bg-neutral-700 active:bg-neutral-600 px-3 py-2 text-neutral-50'
+        onClick={async () => {
+          if (!profileImage) {
+            return;
+          }
+
+          try {
+            const response = await fetch(`/api/assets/profile-image`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/octet-stream',
+              },
+              body: await profileImage.arrayBuffer(),
+            });
+
+            const result = await response.json();
+            console.log('Success:', result);
+          } catch (error) {
+            console.log(error);
+          }
+        }}
+      >
+        Upload Profile Image Blob
+      </button>
+      <button
+        className='w-fit rounded-full bg-neutral-800 hover:bg-neutral-700 active:bg-neutral-600 px-3 py-2 text-neutral-50'
+        onClick={async () => {
+          try {
+            const response = await fetch(`/api/assets/profile-image`, {
+              method: 'POST',
+              body: JSON.stringify({
+                mutations: [
+                  {
+                    create: {
+                      full_name: fullName,
+                      first_name: firstName,
+                      middle_name: middleName,
+                      last_name: lastName,
+                      username: newUsername,
+                      email: email,
+                      profile_image_blob: profileImage
+                        ? await profileImage.arrayBuffer()
+                        : null,
+                    },
+                  },
+                ],
+              }),
+            });
+            //await profileImage.arrayBuffer(),
+
+            const result = await response.json();
+            console.log('Success:', result);
+          } catch (error) {
+            console.log(error);
+          }
+        }}
+      >
+        Sign up
+      </button>
     </div>
   );
 }

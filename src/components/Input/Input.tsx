@@ -4,32 +4,36 @@ import { roboto_mono } from '@muze/lib/fonts';
 import { ChangeEventHandler } from 'react';
 
 export default function Input({
-  label,
+  id,
   value,
   onChange,
+  label,
   readOnly,
   disabled,
   required,
 }: {
-  label?: string;
+  id?: string;
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  label?: string;
   readOnly?: boolean;
   disabled?: boolean;
   required?: boolean;
 }) {
   return (
-    <label className='flex flex-col gap-1'>
-      <div className='flex flex-row items-center gap-2'>
-        <span className='pl-3 text-neutral-500'>{label}</span>
+    <div className='flex flex-col gap-1'>
+      {/* <div className='flex flex-row items-center gap-2'>
+        <div className='pl-3 text-neutral-500'>{label}</div>
         {required ? (
           <>
             <span className='font-black text-2xl text-amber-500 leading-3'>
               *
             </span>
           </>
-        ) : null}
-      </div>
+        ) : (
+          ''
+        )}
+      </div> */}
       <div
         className={[
           'rounded-full',
@@ -51,6 +55,6 @@ export default function Input({
           disabled={disabled}
         />
       </div>
-    </label>
+    </div>
   );
 }

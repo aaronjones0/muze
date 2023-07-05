@@ -7,4 +7,5 @@ export interface User {
   username: string;
   email: string;
   profile_image_url: string;
+  profile_image_blob?: Blob;
 }

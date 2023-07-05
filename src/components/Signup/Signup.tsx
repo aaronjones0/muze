@@ -10,7 +10,7 @@ import ProcessingIndicator from '../ProcessingIndicator/ProcessingIndicator';
 export default function Signup() {
   const { session, status } = useRequiredSession();
 
-  const sanityWrite = useSanityWriteClient(process.env.SANITY_API_TOKEN ?? '');
+  const sanityWrite = useSanityWriteClient();
   const router = useRouter();
 
   const [fullName, setFullName] = useState(session?.user?.name ?? '');

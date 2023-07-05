@@ -15,15 +15,16 @@ export default async function Me() {
 
   if (!!session) {
     const users = await getUser(session.user?.email ?? '');
+    const user = users ? users[0] : undefined;
 
     return (
-      !!users[0] && (
+      !!user && (
         <div className='flex flex-col text-neutral-500'>
           <div className='flex justify-center items-center'>
-            {users[0] && (
+            {user && (
               <div className='rounded-full w-44 h-44 overflow-hidden'>
                 <Image
-                  src={users[0].profile_image_url}
+                  src={user.profile_image_url}
                   alt='Profile Avatar'
                   height={192}
                   width={192}
@@ -33,8 +34,8 @@ export default async function Me() {
             )}
           </div>
           <h1 className='text-4xl font-black'>Profile</h1>
-          <p className='font-black'>{users[0].name}</p>
-          <p className='font-light'>{users[0].email}</p>
+          <p className='font-black'>{user.full_name}</p>
+          <p className='font-light'>{user.email}</p>
           <LinkButton label='Home' href='/' hotkey='h' />
         </div>
       )
