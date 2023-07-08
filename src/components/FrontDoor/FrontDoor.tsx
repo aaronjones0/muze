@@ -45,10 +45,12 @@ export default async function FrontDoor() {
             Muze
           </h1>
           <Image
+            priority
             src='/MuzeTextLogo_v2.png'
             alt='Muze Logo'
-            height={963}
-            width={484}
+            height={484}
+            width={963}
+            className='h-min w-min'
           />
           <HeroButton label='Enter' href='/home' />
         </div>

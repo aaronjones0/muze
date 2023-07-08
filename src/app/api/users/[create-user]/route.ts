@@ -6,9 +6,18 @@ export async function POST(request: NextRequest) {
   const sanityWriteClient = useSanityWriteClient();
 
   // const user: User = JSON.parse(JSON.stringify(request.body));
-  const data = await request.json();
+  const newUser = await request.json();
 
-  console.log(data);
+  console.log(newUser);
+
+  try {
+    const user = await sanityWriteClient.create(newUser);
+    return NextResponse.json(user);
+  } catch (error) {
+    console.error('Caught an error while trying to create a new user.');
+    console.error(error);
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
 
   // if (!user) {
   //   return NextResponse.json(

@@ -6,6 +6,10 @@ export interface User {
   last_name: string;
   username: string;
   email: string;
+  profile_image: {
+    _type: string;
+    _ref: string;
+  };
   profile_image_url: string;
   profile_image_blob?: Blob;
 }

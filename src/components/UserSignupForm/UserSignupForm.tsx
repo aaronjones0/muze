@@ -85,7 +85,7 @@ export default function UserSignupForm({
               {profileImage ? (
                 <div className='flex flex-row items-center'>
                   <Image
-                    className='object-cover'
+                    className='object-cover h-20 w-20'
                     height={80}
                     width={80}
                     src={URL.createObjectURL(profileImage)}
@@ -120,7 +120,7 @@ export default function UserSignupForm({
           {profileImage && <p>Image size: {profileImage.size / 1000000} MB</p>}
         </div>
       </label>
-      <button
+      {/* <button
         className='w-fit rounded-full bg-neutral-800 hover:bg-neutral-700 active:bg-neutral-600 px-3 py-2 text-neutral-50'
         onClick={async () => {
           if (!profileImage) {
@@ -144,37 +144,28 @@ export default function UserSignupForm({
         }}
       >
         Upload Profile Image Blob
-      </button>
+      </button> */}
       <button
         className='w-fit rounded-full bg-neutral-800 hover:bg-neutral-700 active:bg-neutral-600 px-3 py-2 text-neutral-50'
         onClick={async () => {
-          try {
-            const response = await fetch(`/api/assets/profile-image`, {
-              method: 'POST',
-              body: JSON.stringify({
-                mutations: [
-                  {
-                    create: {
-                      full_name: fullName,
-                      first_name: firstName,
-                      middle_name: middleName,
-                      last_name: lastName,
-                      username: newUsername,
-                      email: email,
-                      profile_image_blob: profileImage
-                        ? await profileImage.arrayBuffer()
-                        : null,
-                    },
-                  },
-                ],
-              }),
-            });
-            //await profileImage.arrayBuffer(),
+          if (!profileImage) {
+            createUser();
+          } else {
+            try {
+              const response = await fetch(`/api/assets/profile-image`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/octet-stream',
+                },
+                body: await profileImage.arrayBuffer(),
+              });
 
-            const result = await response.json();
-            console.log('Success:', result);
-          } catch (error) {
-            console.log(error);
+              const profileImageDoc = await response.json();
+              console.log(profileImageDoc);
+              createUser(profileImageDoc._id);
+            } catch (error) {
+              console.log(error);
+            }
           }
         }}
       >
@@ -182,4 +173,61 @@ export default function UserSignupForm({
       </button>
     </div>
   );
+
+  async function createUser(documentId?: string) {
+    if (!documentId) {
+      console.debug('No document ID.');
+    }
+
+    try {
+      const response = await fetch(`/api/users/create-user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          _type: 'user',
+          full_name: fullName,
+          first_name: firstName,
+          middle_name: middleName,
+          last_name: lastName,
+          username: newUsername,
+          email: email,
+          profile_image: {
+            _type: 'image',
+            asset: {
+              _type: 'reference',
+              _ref: documentId,
+            },
+          },
+        }),
+      });
+
+      // {
+      //   mutations: [
+      //     {
+      //       create: {
+      //         full_name: fullName,
+      //         first_name: firstName,
+      //         middle_name: middleName,
+      //         last_name: lastName,
+      //         username: newUsername,
+      //         email: email,
+      //         profile_image: {
+      //           _type: 'image',
+      //           _ref: documentId,
+      //         },
+      //       },
+      //     },
+      //   ],
+      // }
+
+      const result = await response.json();
+
+      console.log('Success:', result);
+    } catch (error) {
+      // TODO: Delete uploaded profile image here.
+      console.log(error);
+    }
+  }
 }
