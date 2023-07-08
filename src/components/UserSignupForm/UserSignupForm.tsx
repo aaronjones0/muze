@@ -120,31 +120,6 @@ export default function UserSignupForm({
           {profileImage && <p>Image size: {profileImage.size / 1000000} MB</p>}
         </div>
       </label>
-      {/* <button
-        className='w-fit rounded-full bg-neutral-800 hover:bg-neutral-700 active:bg-neutral-600 px-3 py-2 text-neutral-50'
-        onClick={async () => {
-          if (!profileImage) {
-            return;
-          }
-
-          try {
-            const response = await fetch(`/api/assets/profile-image`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/octet-stream',
-              },
-              body: await profileImage.arrayBuffer(),
-            });
-
-            const result = await response.json();
-            console.log('Success:', result);
-          } catch (error) {
-            console.log(error);
-          }
-        }}
-      >
-        Upload Profile Image Blob
-      </button> */}
       <button
         className='w-fit rounded-full bg-neutral-800 hover:bg-neutral-700 active:bg-neutral-600 px-3 py-2 text-neutral-50'
         onClick={async () => {
@@ -202,25 +177,6 @@ export default function UserSignupForm({
           },
         }),
       });
-
-      // {
-      //   mutations: [
-      //     {
-      //       create: {
-      //         full_name: fullName,
-      //         first_name: firstName,
-      //         middle_name: middleName,
-      //         last_name: lastName,
-      //         username: newUsername,
-      //         email: email,
-      //         profile_image: {
-      //           _type: 'image',
-      //           _ref: documentId,
-      //         },
-      //       },
-      //     },
-      //   ],
-      // }
 
       const result = await response.json();
 
