@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import Input from '../Input/Input';
 import FieldLabel from '../FieldLabel/FieldLabel';
+import { useRouter } from 'next/navigation';
 
 export default function UserSignupForm({
   email,
@@ -13,6 +14,8 @@ export default function UserSignupForm({
   email: string;
   username?: string;
 }) {
+  const router = useRouter();
+
   const [fullName, setFullName] = useState(username ?? '');
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
@@ -181,6 +184,8 @@ export default function UserSignupForm({
       const result = await response.json();
 
       console.log('Success:', result);
+
+      router.push('/home');
     } catch (error) {
       // TODO: Delete uploaded profile image here.
       console.log(error);
