@@ -13,7 +13,13 @@
 ## Technical Documentation
 
 * [Tech Stack](technical-documentation/tech-stack.md)
-* [NextJS](technical-documentation/readme.md)
+* [AuthN / AuthZ Flow](technical-documentation/authn-authz-flow.md)
+* [NextJS](technical-documentation/technical-documentation/README.md)
+  * [Next Auth](technical-documentation/technical-documentation/next-auth.md)
+  * [Remotely Hosted Images](technical-documentation/technical-documentation/remotely-hosted-images.md)
 * [Sanity](technical-documentation/sanity/README.md)
+  * [Mutations](technical-documentation/sanity/mutations.md)
   * [Connecting content to NextJS](technical-documentation/sanity/connecting-content-to-nextjs.md)
   * [Designing a Document Database](technical-documentation/sanity/designing-a-document-database.md)
+  * [GROQ Queries in Sanity](technical-documentation/sanity/groq-queries-in-sanity.md)
+  * [Assets and Server-Side Client](technical-documentation/sanity/assets-and-server-side-client.md)

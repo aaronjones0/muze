@@ -9,7 +9,7 @@ export default async function Page() {
   return (
     <>
       <h1 className='text-3xl font-black'>TV Series&apos;</h1>
-      <LinkButton label='Home' href='/' hotkey='h' />
+      <LinkButton label='Home' href='/home' hotkey='h' />
       <div className='flex flex-row flex-wrap gap-4 justify-evenly justify-items-center h-80'>
         {tvSeries.map((tvs: TVSeries) => (
           <Link key={tvs._id} href={`/tv-series/${tvs._id}`}>

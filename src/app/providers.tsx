@@ -1,16 +1,31 @@
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import FrontDoor from '@muze/components/FrontDoor/FrontDoor';
+import ProcessingIndicator from '@muze/components/ProcessingIndicator/ProcessingIndicator';
+import { useSession } from 'next-auth/react';
 import React from 'react';
+import AuthContext from './AuthContext';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const [queryClient] = React.useState(() => new QueryClient());
+  // const [queryClient] = React.useState(() => new QueryClient());
+  const { data: session, status } = useSession();
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
+  if (status === 'loading') {
+    return <ProcessingIndicator text='Processing' />;
+  }
+
+  if (status === 'unauthenticated') {
+    <FrontDoor />;
+  }
+
+  if (status === 'authenticated') {
+    if (!!session) {
+      return (
+        // <QueryClientProvider client={queryClient}>
+        <AuthContext session={session}>{children}</AuthContext>
+        // <ReactQueryDevtools initialIsOpen={false} />
+        // </QueryClientProvider>
+      );
+    }
+  }
 }

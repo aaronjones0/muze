@@ -28,7 +28,9 @@ export default async function Page({ params }: { params: { id: string } }) {
             </h3>
             <div
               className={[
-                manga.owned ? 'bg-amber-500 text-neutral-900' : 'bg-neutral-900 border-2 border-neutral-700 text-neutral-700',
+                manga.owned
+                  ? 'bg-amber-500 text-neutral-900'
+                  : 'bg-neutral-900 border-2 border-neutral-700 text-neutral-700',
                 'rounded-full w-min px-2 py-0.5 flex flex-row gap-1.5 items-center font-medium',
               ].join(' ')}
             >
@@ -36,9 +38,17 @@ export default async function Page({ params }: { params: { id: string } }) {
               {manga.owned ? <CheckBadgeIcon className='h-6 w-6' /> : null}
             </div>
           </div>
+          <div className='grid grid-rows-3 grid-flow-col auto-cols-min gap-x-3'>
+            <p className='font-light'>Mangaka:</p>
+            <p className='font-light'>Author:</p>
+            <p className='font-light'>Publisher:</p>
+            <p className='whitespace-nowrap font-medium'>{manga.mangaka?.full_name}</p>
+            <p className='whitespace-nowrap font-medium'>{manga.author?.full_name}</p>
+            <p className='whitespace-nowrap font-medium'>{manga.publisher?.name}</p>
+          </div>
           <div className='mt-4 flex flex-row gap-8'>
             <LinkButton label='Back' href='/manga' hotkey='b' />
-            <LinkButton label='Home' href='/' hotkey='h' />
+            <LinkButton label='Home' href='/home' hotkey='h' />
           </div>
         </div>
       </div>
@@ -66,6 +76,9 @@ async function getMangaDetails(id: string) {
     total_volumes,
     is_omnibus,
     have_read,
+    mangaka->,
+    author->,
+    publisher->
   }`);
 
   return manga;
