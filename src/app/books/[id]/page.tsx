@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </h2>
           <div className='mt-4 flex flex-row gap-8'>
             <LinkButton label='Back' href='/books' hotkey='b' />
-            <LinkButton label='Home' href='/' hotkey='h' />
+            <LinkButton label='Home' href='/home' hotkey='h' />
           </div>
         </div>
         <div className='grid grid-rows-6 grid-flow-col w-fit gap-x-3'>
