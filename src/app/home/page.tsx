@@ -3,13 +3,19 @@
 import HomeView from '@muze/components/HomeView/HomeView';
 import ProcessingIndicator from '@muze/components/ProcessingIndicator/ProcessingIndicator';
 import UserSignupForm from '@muze/components/UserSignupForm/UserSignupForm';
+import { signedIn, signedOut } from '@muze/lib/redux/slices/userSlice';
+import { userSelector } from '@muze/lib/redux/store';
 import { sanity } from '@muze/lib/sanity-client';
 import { User } from '@muze/model/User';
 import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default async function Page() {
+  const user = useSelector(userSelector);
+  const dispatch = useDispatch();
+
   const router = useRouter();
   const { data: session, status } = useSession({
     required: true,
@@ -27,6 +33,8 @@ export default async function Page() {
       const user = await getUser(session.user?.email ?? '');
 
       if (!!user) {
+        dispatch(signedIn(user));
+
         return (
           <>
             <HomeView
@@ -34,14 +42,10 @@ export default async function Page() {
               username={user.username}
               profileImageUrl={user.profile_image_url}
             />
-            {/* <ul>
-              <li>{user?._id}</li>
-              <li>{user?.email}</li>
-              <li>{user?.username}</li>
-              <li>{user?.full_name}</li>
-            </ul> */}
           </>
         );
+      } else {
+        dispatch(signedOut(user));
       }
 
       return (
