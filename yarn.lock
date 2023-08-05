@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz#7bf68b20c0a350f936915fcae06f58e32007ce30"
   integrity sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==
 
-"@auth0/nextjs-auth0@^3.0.0-beta.3":
-  version "3.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@auth0/nextjs-auth0/-/nextjs-auth0-3.0.0-beta.3.tgz#18aa033433cf78ee0be8a8696bdb2ac16159b234"
-  integrity sha512-Wbf2JeeZwGtjbQF8KWggjkMcNUq7/OZcLQGia3YhbVTSYXd++HQs27DYOSZ9UhQRkYS0MrfjARdYZqJHk/CSjw==
+"@auth0/nextjs-auth0@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@auth0/nextjs-auth0/-/nextjs-auth0-3.0.1.tgz#377d7a451dad05f5df847b270dd40cd737cf1078"
+  integrity sha512-ng6kiYJVkOgASg9HBxoivYHEnFyErnAhqp/pXMlFty+XTZFwza0kykDDlQ/q3qDcoh6mIzZopLkQ8y00UItkrw==
   dependencies:
     "@panva/hkdf" "^1.0.2"
     cookie "^0.5.0"
