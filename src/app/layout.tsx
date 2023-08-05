@@ -5,6 +5,7 @@ import AuthContext from './AuthContext';
 // import { Inter, Roboto_Mono } from 'next/font/google';
 import { inter } from '@muze/lib/fonts';
 import './globals.css';
+import Providers from './providers';
 
 export const metadata = {
   title: 'Muze',
@@ -39,9 +40,11 @@ export default async function RootLayout({
         ].join(' ')}
       >
         <AuthContext session={session}>
-          <div className='bg-neutral-900 text-neutral-700 container mx-auto px-4 py-8 h-screen flex flex-col gap-4'>
-            {children}
-          </div>
+          <Providers>
+            <div className='bg-neutral-900 text-neutral-700 container mx-auto px-4 py-8 h-screen flex flex-col gap-4'>
+              {children}
+            </div>
+          </Providers>
         </AuthContext>
       </body>
     </html>
