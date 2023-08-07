@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import HeroButton from '../HeroButton/HeroButton';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default async function FrontDoor() {
+  const { user, error, isLoading } = useUser();
   return (
     <>
       <div className='flex flex-col justify-center items-center gap-16'>
@@ -19,6 +21,21 @@ export default async function FrontDoor() {
           className='h-min w-min'
         />
         <HeroButton label='Enter' href='/home' />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error.</p>
+        ) : user ? (
+          <>
+            <p>{user.name}</p>
+            <p>{user.email}</p>
+            <p>{user.nickname}</p>
+            <p>Email verified: {user.email_verified}</p>
+            <a href='/api/auth/logout'>Sign out</a>
+          </>
+        ) : (
+          <a href='/api/auth/login'>Sign in</a>
+        )}
       </div>
     </>
   );
