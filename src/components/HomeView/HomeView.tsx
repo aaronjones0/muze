@@ -14,26 +14,35 @@ export default async function HomeView({
   email: string;
   profileImageUrl: string;
 }) {
-  // const [s, setS] = useState('');
-
   return (
     <>
-      <AppHeader
-        // commandBarValue={s}
-        // onCommandChanged={(command) => setS(command ?? '')}
-      />
+      <AppHeader />
       <div>
         <>
-          <ProfileBadge
-            username={username}
-            email={email}
-            profileImageUrl={profileImageUrl}
-          />
+          <div className='w-fit'>
+            <ProfileBadge
+              username={username}
+              email={email}
+              profileImageUrl={profileImageUrl}
+            />
+          </div>
           <LinkButton label='Sign out' href='/api/auth/signout' />
           <div className='flex flex-col gap-5'>
-            <Card description='Episodic narratives for the small screen.' title={`TV Series'`} href='/tv-series' />
-            <Card description='Japanese graphic novels.' title={`Manga`} href='/manga' />
-            <Card description='Any non-graphical written work. Exceptions: Newspaper, magazine issue, cooking recipe.' title={`Books`} href='/books' />
+            <Card
+              description='Episodic narratives for the small screen.'
+              title={`TV Series'`}
+              href='/tv-series'
+            />
+            <Card
+              description='Japanese graphic novels.'
+              title={`Manga`}
+              href='/manga'
+            />
+            <Card
+              description='Any non-graphical written work. Exceptions: Newspaper, magazine issue, cooking recipe.'
+              title={`Books`}
+              href='/books'
+            />
           </div>
         </>
       </div>
