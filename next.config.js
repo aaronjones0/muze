@@ -6,16 +6,22 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn.discordapp.com',
         port: '',
-        pathname: '/avatars/**'
+        pathname: '/avatars/**',
       },
       {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
         port: '',
-        pathname: '/**'
-      }
-    ]
-  }
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 's.gravatar.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
