@@ -3,10 +3,10 @@ import firebaseAdmin from 'firebase-admin';
 
 const serviceAccount = require('../../../firebase/firebase-key.json');
 
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(serviceAccount),
-  databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`,
-});
+// firebaseAdmin.initializeApp({
+//   credential: firebaseAdmin.credential.cert(serviceAccount),
+//   databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`,
+// });
 
 export async function GET(req: NextRequest, res: NextResponse) {
   const username = req.nextUrl.searchParams.get('username');
@@ -22,5 +22,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const firebaseToken = await firebaseAdmin
       .auth()
       .createCustomToken(username);
-  } catch (error) {}
+    console.debug(firebaseToken);
+  } catch (error) {
+    console.error(error);
+  }
 }
