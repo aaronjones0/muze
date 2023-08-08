@@ -1,6 +1,6 @@
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextResponse } from 'next/server';
-import database from '../../../firebase/db';
+import { database } from '../../../firebase';
 
 const GET = withApiAuthRequired(async () => {
   const session = await getSession();
