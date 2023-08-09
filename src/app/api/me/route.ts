@@ -1,21 +1,31 @@
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
+import { getStorage } from 'firebase-admin/storage';
 import { NextResponse } from 'next/server';
-import { database, storage } from '../../../firebase';
+import { firebaseApp } from '@muze/lib/firebase';
+import { getFirestore } from 'firebase-admin/firestore';
 
 const GET = withApiAuthRequired(async () => {
   const session = await getSession();
 
-  if (!!session) {
+  if (!!session && !!firebaseApp) {
+    // Auth0
     const auth0User = session.user;
-    const firebaseUser = await database
+
+    // Firebase Firestore
+    const db = getFirestore(firebaseApp);
+
+    const firebaseUser = await db
       .collection('users')
       .where('email', '==', auth0User.email)
       .get();
 
     const firebaseUserData = firebaseUser.docs.map((user) => user.data());
 
-    console.debug(auth0User);
-    console.debug(firebaseUserData);
+    // Firebase Storage
+    const storage = getStorage();
+    console.debug(storage);
+    // const imageRef = ref(storage, `users/${auth0User.email}/kitmasked.png`);
+    // console.debug(imageRef);
 
     return NextResponse.json({
       idNickname: auth0User.nickname,

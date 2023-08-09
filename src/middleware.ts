@@ -6,10 +6,3 @@ export default withMiddlewareAuthRequired();
 // export const config = {
 //   matcher: ['/app-router/profile-middleware', '/profile-middleware'],
 // };
-
-// const serviceAccount = require('../src/firebase/firebase-key.json');
-
-// firebaseAdmin.initializeApp({
-//   credential: firebaseAdmin.credential.cert(serviceAccount),
-//   databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`,
-// });
