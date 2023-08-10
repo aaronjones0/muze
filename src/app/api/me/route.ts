@@ -1,5 +1,5 @@
 import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
-import { getStorage } from 'firebase-admin/storage';
+import { getDownloadURL, getStorage } from 'firebase-admin/storage';
 import { NextResponse } from 'next/server';
 import { firebaseApp } from '@muze/lib/firebase';
 import { getFirestore } from 'firebase-admin/firestore';
@@ -23,9 +23,10 @@ const GET = withApiAuthRequired(async () => {
 
     // Firebase Storage
     const storage = getStorage();
-    console.debug(storage);
-    // const imageRef = ref(storage, `users/${auth0User.email}/kitmasked.png`);
-    // console.debug(imageRef);
+    const fileRef = storage
+      .bucket()
+      .file(`users/${auth0User.email}/kitmasked.png`);
+    const fileUrl = await getDownloadURL(fileRef);
 
     return NextResponse.json({
       idNickname: auth0User.nickname,
@@ -37,6 +38,7 @@ const GET = withApiAuthRequired(async () => {
       profileJoined: firebaseUserData[0].joined,
       profileEmail: firebaseUserData[0].email,
       profileUsername: firebaseUserData[0].username,
+      profileImageUrl: fileUrl,
     });
   }
 });
