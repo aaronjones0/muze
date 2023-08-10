@@ -1,4 +1,8 @@
-# Next Auth
+# ⚠ Next Auth
+
+{% hint style="danger" %}
+Deprecated. Using Auth0 now for AuthN / AuthZ.
+{% endhint %}
 
 ## References
 

@@ -15,7 +15,7 @@
 * [Tech Stack](technical-documentation/tech-stack.md)
 * [⚠ AuthN / AuthZ Flow](technical-documentation/authn-authz-flow.md)
 * [NextJS](technical-documentation/technical-documentation/README.md)
-  * [Next Auth](technical-documentation/technical-documentation/next-auth.md)
+  * [⚠ Next Auth](technical-documentation/technical-documentation/next-auth.md)
   * [Remotely Hosted Images](technical-documentation/technical-documentation/remotely-hosted-images.md)
 * [Firebase](technical-documentation/firebase/README.md)
   * [Document Database](technical-documentation/firebase/document-database.md)
