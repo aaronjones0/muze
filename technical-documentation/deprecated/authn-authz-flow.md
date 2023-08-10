@@ -1,4 +1,4 @@
-# ⚠ AuthN / AuthZ Flow
+# AuthN / AuthZ Flow
 
 {% hint style="danger" %}
 Deprecated. Using Auth0 for AuthN/AuthZ now instead of Next-Auth.
