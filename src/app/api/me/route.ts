@@ -3,6 +3,7 @@ import { firebaseApp } from '@muze/lib/firebase';
 import { getFirestore } from 'firebase-admin/firestore';
 import { getDownloadURL, getStorage } from 'firebase-admin/storage';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 
 const GET = withApiAuthRequired(
   async (req: NextApiRequest, res: NextApiResponse) => {
@@ -29,19 +30,19 @@ const GET = withApiAuthRequired(
         .file(`users/${auth0User.email}/kitmasked.png`);
       const fileUrl = await getDownloadURL(fileRef);
 
-      return res.json({});
-      // return NextResponse.json({
-      //   idNickname: auth0User.nickname,
-      //   idName: auth0User.name,
-      //   idPicture: auth0User.picture,
-      //   idUpdatedAt: auth0User.updated_at,
-      //   idEmail: auth0User.email,
-      //   idEmailVerified: auth0User.email_verified,
-      //   profileJoined: firebaseUserData[0].joined,
-      //   profileEmail: firebaseUserData[0].email,
-      //   profileUsername: firebaseUserData[0].username,
-      //   profileImageUrl: fileUrl,
-      // });
+      // return res.end();
+      return NextResponse.json({
+        idNickname: auth0User.nickname,
+        idName: auth0User.name,
+        idPicture: auth0User.picture,
+        idUpdatedAt: auth0User.updated_at,
+        idEmail: auth0User.email,
+        idEmailVerified: auth0User.email_verified,
+        profileJoined: firebaseUserData[0].joined,
+        profileEmail: firebaseUserData[0].email,
+        profileUsername: firebaseUserData[0].username,
+        profileImageUrl: fileUrl,
+      });
     }
   }
 );
