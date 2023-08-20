@@ -2,10 +2,9 @@ import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { firebaseApp } from '@muze/lib/firebase';
 import { getFirestore } from 'firebase-admin/firestore';
 import { getDownloadURL, getStorage } from 'firebase-admin/storage';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse } from 'next/server';
+import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
-const GET = withApiAuthRequired(
+const GET: NextApiHandler = withApiAuthRequired(
   async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await getSession();
 
@@ -31,7 +30,7 @@ const GET = withApiAuthRequired(
       const fileUrl = await getDownloadURL(fileRef);
 
       // return res.end();
-      return NextResponse.json({
+      return res.status(200).json({
         idNickname: auth0User.nickname,
         idName: auth0User.name,
         idPicture: auth0User.picture,
