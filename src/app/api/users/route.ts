@@ -1,9 +1,9 @@
-import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
-import { NextResponse } from 'next/server';
+import { getSession } from '@auth0/nextjs-auth0';
 import { firebaseApp } from '@muze/lib/firebase';
 import { getFirestore } from 'firebase-admin/firestore';
+import { NextResponse } from 'next/server';
 
-const GET = withApiAuthRequired(async () => {
+const GET = async () => {
   const session = await getSession();
 
   if (!!session && !!firebaseApp) {
@@ -24,6 +24,6 @@ const GET = withApiAuthRequired(async () => {
       });
     }
   }
-});
+};
 
 export { GET };
