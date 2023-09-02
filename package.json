@@ -8,8 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
@@ -37,12 +37,13 @@
     "@storybook/addon-essentials": "^7.4.0",
     "@storybook/addon-interactions": "^7.4.0",
     "@storybook/addon-links": "^7.4.0",
-    "@storybook/builder-webpack5": "^7.4.0",
-    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/addon-mdx-gfm": "7.4.0",
+    "@storybook/nextjs": "7.4.0",
     "@storybook/react": "^7.4.0",
     "@storybook/testing-library": "^0.2.0",
     "@tanstack/eslint-plugin-query": "^4.29.9",
     "babel-loader": "^8.3.0",
-    "eslint-plugin-storybook": "^0.6.13"
+    "eslint-plugin-storybook": "^0.6.13",
+    "storybook": "7.4.0"
   }
 }
