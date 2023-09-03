@@ -4,7 +4,6 @@ import { LifebuoyIcon } from '@heroicons/react/24/outline';
 import HomeView from '@muze/components/HomeView/HomeView';
 import ImageCard from '@muze/components/ImageCard/ImageCard';
 import C from '@muze/components/TextFormatting/Code';
-import BreakTheWorld from '@muze/components/sentry-test/BreakTheWorld';
 import Link from 'next/link';
 
 export default async function Home() {
@@ -37,7 +36,6 @@ export default async function Home() {
           Help
         </Link>
       </div>
-      <BreakTheWorld />
     </>
   );
 }
