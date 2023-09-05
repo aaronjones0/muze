@@ -1,6 +1,7 @@
 'use client';
 
 import { LifebuoyIcon } from '@heroicons/react/24/outline';
+import Card from '@muze/components/Card/Card';
 import HomeView from '@muze/components/HomeView/HomeView';
 import ImageCard from '@muze/components/ImageCard/ImageCard';
 import C from '@muze/components/TextFormatting/Code';
@@ -13,6 +14,33 @@ export default async function Home() {
         <HomeView />
       </div>
       <div className='grow flex flex-col gap-2 mx-4 justify-center items-center pointer-events-none'>
+        <div className='flex flex-row gap-4 p-2'>
+          <Card
+            title='Video Games'
+            description='Vidya gaems.'
+            href='/collection/video-games'
+          />
+          <Card
+            title='Manga'
+            description='Japanese graphic novels.'
+            href='/collection/manga'
+          />
+          <Card
+            title="TV Series'"
+            description='Episodic visual narratives.'
+            href='/collection/tv-series'
+          />
+          <Card
+            title='Movies'
+            description='Long-form visual narratives.'
+            href='/collection/movies'
+          />
+          <Card
+            title='Books'
+            description='Written works.'
+            href='/collection/books'
+          />
+        </div>
         <ImageCard src='/RadicalEdward.gif' alt='Under construction' />
         <p className={['text-neutral-500 text-2xl font-black mt-2'].join(' ')}>
           Under Construction
