@@ -1,11 +1,10 @@
 import ImageTile from '@muze/components/ImageTile/ImageTile';
 import LinkButton from '@muze/components/LinkButton/LinkButton';
-import { sanity } from '@muze/lib/sanity-client';
 import { Book } from '@muze/model/Book';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const bookId: string = params.id;
-  const results: Book[] = await getBookDetails(bookId);
+  const results: Book[] = [];
   const book: Book = results[0];
 
   return (
@@ -46,22 +45,4 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
     </div>
   );
-}
-
-async function getBookDetails(bookId: string) {
-  const book = sanity.fetch(`*[_type == "book" && _id == "${bookId}"]{
-    _id,
-    short_title,
-    full_title,
-    subtitle,
-    volume,
-    edition,
-    isbn,
-    publisher,
-    notes,
-    "cover_image_url": cover_image.asset->url,
-    owned,
-  }`);
-
-  return book;
 }

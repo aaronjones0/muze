@@ -1,11 +1,10 @@
 import ImageCard from '@muze/components/ImageCard/ImageCard';
 import LinkButton from '@muze/components/LinkButton/LinkButton';
-import { sanity } from '@muze/lib/sanity-client';
 import { Manga } from '@muze/model/Manga';
 import Link from 'next/link';
 
 export default async function Page() {
-  const manga = await getManga();
+  const manga: Manga[] = [];
 
   return (
     <>
@@ -33,14 +32,4 @@ export default async function Page() {
       </div>
     </>
   );
-}
-
-async function getManga() {
-  const manga = sanity.fetch(`*[_type == "manga"]{
-    _id,
-    title_english,
-    "front_cover_english_url": front_cover_english.asset->url,
-  }`);
-
-  return manga;
 }

@@ -35,5 +35,11 @@ yarn-error.log*
 next-env.d.ts
 node_modules
 
+# Sentry Auth Token
+.sentryclirc
+
+# Sentry Auth Token
+.sentryclirc
+
 # Firebase
 /src/firebase/firebase-key.json

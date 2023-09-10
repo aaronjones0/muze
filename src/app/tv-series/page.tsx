@@ -1,11 +1,10 @@
 import ImageCard from '@muze/components/ImageCard/ImageCard';
 import LinkButton from '@muze/components/LinkButton/LinkButton';
-import { sanity } from '@muze/lib/sanity-client';
 import { TVSeries } from '@muze/model/TVSeries';
 import Link from 'next/link';
 
 export default async function Page() {
-  const tvSeries = await getTVSeries();
+  const tvSeries: TVSeries[] = [];
   return (
     <>
       <h1 className='text-3xl font-black'>TV Series&apos;</h1>
@@ -34,13 +33,4 @@ export default async function Page() {
       </div>
     </>
   );
-}
-
-async function getTVSeries() {
-  const tvSeries = sanity.fetch(`*[_type == "tvSeries"]{
-    _id,
-    short_title,
-    "image_primary_url": image_primary.asset->url
-  }`);
-  return tvSeries;
 }
