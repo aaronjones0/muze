@@ -1,13 +1,11 @@
-import { CheckBadgeIcon, MinusIcon } from '@heroicons/react/24/outline';
+import { CheckBadgeIcon } from '@heroicons/react/24/outline';
 import ImageTile from '@muze/components/ImageTile/ImageTile';
 import LinkButton from '@muze/components/LinkButton/LinkButton';
-import Switch from '@muze/components/Switch/Switch';
-import { sanity } from '@muze/lib/sanity-client';
 import { Manga } from '@muze/model/Manga';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const mangaId: string = params.id;
-  const results: Manga[] = await getMangaDetails(mangaId);
+  const results: Manga[] = [];
   const manga: Manga = results[0];
 
   return (
@@ -50,23 +48,4 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
     </div>
   );
-}
-
-async function getMangaDetails(id: string) {
-  const manga = sanity.fetch(`*[_type == "manga" && _id == "${id}"]{
-    _id,
-    title_english,
-    title_japanese,
-    "front_cover_english_url": front_cover_english.asset->url,
-    "back_cover_english_url": back_cover_english.asset->url,
-    "front_cover_japanese_url": front_cover_japanese.asset->url,
-    "back_cover_japanese_url": back_cover_japanese.asset->url,
-    owned,
-    volume,
-    total_volumes,
-    is_omnibus,
-    have_read,
-  }`);
-
-  return manga;
 }

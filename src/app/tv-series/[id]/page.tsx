@@ -1,11 +1,10 @@
 import ImageTile from '@muze/components/ImageTile/ImageTile';
 import LinkButton from '@muze/components/LinkButton/LinkButton';
-import { sanity } from '@muze/lib/sanity-client';
 import { TVSeries } from '@muze/model/TVSeries';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const tvSeriesId = params.id;
-  const results: TVSeries[] = await getTVSeries(tvSeriesId);
+  const results: TVSeries[] = [];
   const tvSeries = results[0];
 
   return (
@@ -35,17 +34,4 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
     </div>
   );
-}
-
-async function getTVSeries(tvSeriesId: string) {
-  const tvSeries =
-    sanity.fetch(`*[_type == "tvSeries" && _id == "${tvSeriesId}"]{
-    _id,
-    full_title,
-    short_title,
-    tag_line,
-    "image_primary_url":image_primary.asset->url
-  }`);
-
-  return tvSeries;
 }

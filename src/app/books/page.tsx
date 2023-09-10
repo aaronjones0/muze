@@ -1,11 +1,10 @@
 import ImageCard from '@muze/components/ImageCard/ImageCard';
 import LinkButton from '@muze/components/LinkButton/LinkButton';
-import { sanity } from '@muze/lib/sanity-client';
 import { Book } from '@muze/model/Book';
 import Link from 'next/link';
 
 export default async function Page() {
-  const books: Book[] = await getBooks();
+  const books: Book[] = [];
 
   return (
     <>
@@ -33,13 +32,4 @@ export default async function Page() {
       </div>
     </>
   );
-}
-
-async function getBooks() {
-  const books = sanity.fetch(`*[_type == "book"]{
-    _id,
-    short_title,
-    "cover_image_url": cover_image.asset->url
-  }`);
-  return books;
 }
