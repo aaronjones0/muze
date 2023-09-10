@@ -1,16 +1,26 @@
 'use client';
 
-import { LifebuoyIcon } from '@heroicons/react/24/outline';
-import Card from '@muze/components/Card/Card';
-import HomeView from '@muze/components/HomeView/HomeView';
-import ImageCard from '@muze/components/ImageCard/ImageCard';
-import C from '@muze/components/TextFormatting/Code';
-import Link from 'next/link';
+import { AddButton } from '@muze/components/AddButton/AddButton';
+import { Avatar } from '@muze/components/Avatar/Avatar';
+import { SearchBox } from '@muze/components/SearchBox/SearchBox';
+import { SettingsButton } from '@muze/components/SettingsButton/SettingsButton';
 
 export default async function Home() {
   return (
     <>
-      <div className='h-20'>
+      <div className='flex flex-col h-full items-center justify-end gap-4 px-[11px] py-16 relative bg-[color:var(--neutralneutral-800)]'>
+        <div className='flex w-full items-start justify-between relative flex-[0_0_auto]'>
+          <Avatar className='bg-rose-500' />
+          <AddButton />
+          <SettingsButton className='' />
+        </div>
+        <SearchBox
+          backgroundClassName='w-full'
+          className='self-stretch flex-[0_0_auto] flex w-full'
+          text='Search Text'
+        />
+      </div>
+      {/* <div className='h-20'>
         <HomeView />
       </div>
       <div className='grow flex flex-col gap-2 mx-4 justify-center items-center pointer-events-none'>
@@ -63,7 +73,7 @@ export default async function Home() {
           <LifebuoyIcon className='h-6 w-6 text-indigo-500' />
           Help
         </Link>
-      </div>
+      </div> */}
     </>
   );
 }
