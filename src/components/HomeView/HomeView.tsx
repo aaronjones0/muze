@@ -1,17 +1,51 @@
 'use client';
 
-import { useState } from 'react';
 import AppHeader from '../AppHeader/AppHeader';
+import Card from '../Card/Card';
+import LinkButton from '../LinkButton/LinkButton';
+import ProfileBadge from '../ProfileBadge/ProfileBadge';
 
-export default function HomeView() {
-  const [s, setS] = useState('');
-
+export default async function HomeView({
+  username,
+  email,
+  profileImageUrl,
+}: {
+  username: string;
+  email: string;
+  profileImageUrl: string;
+}) {
   return (
     <>
-      <AppHeader
-        commandBarValue={s}
-        onCommandChanged={(command) => setS(command)}
-      />
+      <AppHeader />
+      <div>
+        <>
+          <div className='w-fit'>
+            <ProfileBadge
+              username={username}
+              email={email}
+              profileImageUrl={profileImageUrl}
+            />
+          </div>
+          <LinkButton label='Sign out' href='/api/auth/signout' />
+          <div className='flex flex-col gap-5'>
+            <Card
+              description='Episodic narratives for the small screen.'
+              title={`TV Series'`}
+              href='/tv-series'
+            />
+            <Card
+              description='Japanese graphic novels.'
+              title={`Manga`}
+              href='/manga'
+            />
+            <Card
+              description='Any non-graphical written work. Exceptions: Newspaper, magazine issue, cooking recipe.'
+              title={`Books`}
+              href='/books'
+            />
+          </div>
+        </>
+      </div>
     </>
   );
 }

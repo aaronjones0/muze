@@ -1,16 +1,9 @@
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import store from '@muze/lib/redux/store';
 import React from 'react';
+import { Provider } from 'react-redux';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const [queryClient] = React.useState(() => new QueryClient());
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
+  return <Provider store={store}>{children}</Provider>;
 }

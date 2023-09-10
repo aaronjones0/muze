@@ -40,3 +40,6 @@ node_modules
 
 # Sentry Auth Token
 .sentryclirc
+
+# Firebase
+/src/firebase/firebase-key.json
